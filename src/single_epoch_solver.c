@@ -1225,7 +1225,7 @@ s8 calc_PVT(const u8 n_used,
   u8 sats_used = 0;
   gnss_sid_set_t sids_used;
   sid_set_init(&sids_used);
-  const navigation_measurement_t **nav_meas_ptrs =
+  navigation_measurement_t **nav_meas_ptrs =
       LSN_ALLOCATE(n_used * sizeof(navigation_measurement_t *));
   assert(nav_meas_ptrs != NULL);
 
