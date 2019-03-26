@@ -1487,7 +1487,6 @@ s8 calc_PVT_pred(const u8 n_used,
   assert(soln != NULL);
   assert(dops != NULL);
   u8 processed_signals = 0;
-  u8 sats_used = 0;
   gnss_sid_set_t sids_used;
   sid_set_init(&sids_used);
   const navigation_measurement_t **nav_meas_ptrs =
@@ -1498,7 +1497,6 @@ s8 calc_PVT_pred(const u8 n_used,
     if (pred(nav_meas[i].sid)) {
       nav_meas_ptrs[processed_signals++] = &nav_meas[i];
       sid_set_add(&sids_used, nav_meas[i].sid);
-      sats_used = sid_set_get_sat_count(&sids_used);
     }
   }
 
