@@ -1558,7 +1558,6 @@ s8 get_tgd_correction(const ephemeris_t *eph,
         return 0;
       }
       log_debug_sid(*sid, "TGD not applied for the signal");
-
       return -1;
     case CONSTELLATION_INVALID:
     case CONSTELLATION_SBAS:
