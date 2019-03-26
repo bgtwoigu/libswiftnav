@@ -113,7 +113,7 @@ s8 calc_PVT(const u8 n_used,
             dops_t *dops,
             gnss_sid_set_t *raim_removed_sids);
 
-typedef bool (*sat_sel_predicate)(gnss_signal_t sid);
+typedef bool (*sat_sel_predicate)(gnss_signal_t sid, gnss_sid_set_t sids_used);
 
 s8 calc_PVT_pred(const u8 n_used,
                  const navigation_measurement_t nav_meas[],
