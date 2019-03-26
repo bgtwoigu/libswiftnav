@@ -1184,7 +1184,9 @@ static bool gps_only(gnss_signal_t sid, gnss_sid_set_t sids_used) {
 }
 static bool gps_l1ca_when_possible(gnss_signal_t sid,
                                    gnss_sid_set_t sids_used) {
-  if (CODE_GPS_L1CA == sid.code) return true;
+  if (CODE_GPS_L1CA == sid.code) {
+    return true;
+  }
   bool use_this = false;
   u8 sats_used = sid_set_get_sat_count(&sids_used);
   if (sats_used <= N_STATE + RAIM_MAX_EXCLUSIONS) {
@@ -1202,8 +1204,9 @@ static bool all_constellations(gnss_signal_t sid, gnss_sid_set_t sids_used) {
 }
 static bool l1_only(gnss_signal_t sid, gnss_sid_set_t sids_used) {
   (void)sids_used;
-  if (CODE_GPS_L1CA == sid.code) return true;
-  if (CODE_GAL_E1B == sid.code) return true;
+  if ((CODE_GPS_L1CA == sid.code) || (CODE_GAL_E1B == sid.code)) {
+    return true;
+  }
   return false;
 }
 
