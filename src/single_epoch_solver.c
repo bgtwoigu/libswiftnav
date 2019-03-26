@@ -1439,4 +1439,5 @@ s8 calc_PVT(const u8 n_used,
   return raim_flag;
 }
 
+/* get max channels */
 u8 get_max_channels(void) { return MAX_CHANNELS; }
