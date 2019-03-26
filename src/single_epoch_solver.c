@@ -1214,7 +1214,7 @@ s8 calc_PVT(const u8 n_used,
             const gps_time_t *tor,
             const bool disable_raim,
             const bool disable_velocity,
-            enum processing_strategy_t strategy,
+            const enum processing_strategy_t strategy,
             gnss_solution *soln,
             dops_t *dops,
             gnss_sid_set_t *raim_removed_sids) {
@@ -1225,7 +1225,7 @@ s8 calc_PVT(const u8 n_used,
   u8 sats_used = 0;
   gnss_sid_set_t sids_used;
   sid_set_init(&sids_used);
-  navigation_measurement_t **nav_meas_ptrs =
+  const navigation_measurement_t **nav_meas_ptrs =
       LSN_ALLOCATE(n_used * sizeof(navigation_measurement_t *));
   assert(nav_meas_ptrs != NULL);
 
