@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.0)
 project(libswiftnav)
 
+if (TARGET swiftnav)
+  message("TARGET swiftnav already defined, stopping processing of ${PROJECT_SOURCE_DIR}.")
+  return()
+else ()
+  message("Adding TARGET swiftnav from ${PROJECT_SOURCE_DIR}.")
+endif()
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
 include(ClangTools)
 include(FindCheck)
