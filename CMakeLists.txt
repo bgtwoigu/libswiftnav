@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 project(libswiftnav)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
+include(SwiftUtils)
+headerguard(swiftnav)
 include(ClangTools)
 include(FindCheck)
 
