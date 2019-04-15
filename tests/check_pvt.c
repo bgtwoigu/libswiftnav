@@ -247,6 +247,7 @@ END_TEST
 START_TEST(test_pvt_vel_repair) {
   u8 n_used = 6;
   gnss_solution soln;
+  memset(&soln, 0, sizeof(gnss_solution));
   dops_t dops;
   gnss_sid_set_t raim_removed_sids;
   gnss_signal_t expected_removed_sid = {.code = CODE_GPS_L1CA, .sat = 5};

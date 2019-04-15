@@ -583,6 +583,15 @@ static s8 filter_solution(gnss_solution *soln, dops_t *dops) {
   return 0;
 }
 
+static bool ecef_is_sane(const double pos_ecef[static 3]) {
+  double norm = vector_norm(3, pos_ecef) / WGS84_A;
+  bool sane = ((norm > 0.8) && (norm < 1.2));
+  if (!sane) {
+    fprintf(stderr, "%f %f %f insane\n", pos_ecef[0], pos_ecef[1], pos_ecef[2]);
+  }
+  return sane;
+}
+
 /** Checks pvt_iter weighted residuals.
  *
  * \param n_used   length of omp
@@ -762,8 +771,12 @@ static s8 pvt_iter(const u8 n_used,
                    const navigation_measurement_t **nav_meas,
                    lsq_data_t *lsq_data) {
   assert(n_used > 0);
-  /* Reset state to zero */
-  memset(lsq_data->rx_state, 0, 8 * sizeof(double));
+  /* Start from center of Earth if it pos ECEF is not sane */
+  if (ecef_is_sane(lsq_data->rx_state)) {
+    memset(lsq_data->rx_state + 3, 0, 5 * sizeof(double));
+  } else {
+    memset(lsq_data->rx_state, 0, 8 * sizeof(double));
+  }
 
   /* G is a geometry matrix tells us how our pseudoranges relate to
    * our state estimates -- it's the Jacobian of d(p_i)/d(x_j) where
@@ -1295,6 +1308,12 @@ s8 calc_PVT_pred(const u8 n_used,
   gnss_sid_set_t removed_sids;
   sid_set_init(&removed_sids);
   lsq_data_t lsq_data;
+  memset(&lsq_data, 0, sizeof(lsq_data_t));
+
+  /* if valid and sane seed the starting ECEF coordinates with those in soln */
+  if (soln->valid && ecef_is_sane(soln->pos_ecef)) {
+    memcpy(lsq_data.rx_state, soln->pos_ecef, 3 * sizeof(double));
+  }
 
   if (raim_flag >= PVT_CONVERGED_RAIM_OK) {
     soln->valid = 0;
