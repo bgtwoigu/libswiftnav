@@ -95,6 +95,4 @@ else ()
 endif()
 
 # unit tests
-if(libswiftnav_BUILD_TESTS)
-    add_subdirectory(tests)
-endif()
+add_subdirectory(tests)
