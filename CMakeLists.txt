@@ -1,14 +1,13 @@
 cmake_minimum_required(VERSION 3.0)
 project(libswiftnav)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
-include(ClangTools)
-include(FindCheck)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/" "${PROJECT_SOURCE_DIR}/cmake/common")
 
 set(MAX_CHANNELS "63" CACHE STRING "Maximum number of concurrent GNSS channels to support.")
 configure_file(src/max_channels.h.in max_channels.h)
 
 include(GNUInstallDirs)
+include(SwiftCmakeOptions)
 
 set(HDRS
     include/swiftnav/almanac.h
@@ -96,6 +95,6 @@ else ()
 endif()
 
 # unit tests
-if(NOT CMAKE_CROSSCOMPILING AND NOT PIKSI_MULTI_UNIT_TEST)
+if(libswiftnav_BUILD_TESTS)
     add_subdirectory(tests)
-endif(NOT CMAKE_CROSSCOMPILING AND NOT PIKSI_MULTI_UNIT_TEST)
+endif()
