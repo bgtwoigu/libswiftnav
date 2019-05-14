@@ -1,4 +1,6 @@
-add_subdirectory(common)
+if(libswiftnav_BUILD_TEST_LIBS)
+  add_subdirectory(common)
+endif()
 
 if(libswiftnav_BUILD_TESTS)
   set(HDRS

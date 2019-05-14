@@ -8,7 +8,11 @@ configure_file(src/max_channels.h.in max_channels.h)
 
 include(GNUInstallDirs)
 include(SwiftCmakeOptions)
-swift_create_project_options(TEST_PACKAGES "Check")
+swift_create_project_options(
+    TESTS
+    TEST_LIBS
+    TEST_PACKAGES "Check"
+    )
 
 set(HDRS
     include/swiftnav/almanac.h
