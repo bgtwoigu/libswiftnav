@@ -8,6 +8,7 @@ configure_file(src/max_channels.h.in max_channels.h)
 
 include(GNUInstallDirs)
 include(SwiftCmakeOptions)
+swift_create_project_options(TEST_PACKAGES "Check")
 
 set(HDRS
     include/swiftnav/almanac.h
@@ -95,4 +96,9 @@ else ()
 endif()
 
 # unit tests
-add_subdirectory(tests)
+if(libswiftnav_BUILD_TESTS OR libswiftnav_BUILD_TEST_LIBS)
+  if(libswiftnav_BUILD_TESTS)
+    enable_testing()
+  endif()
+  add_subdirectory(tests)
+endif()
