@@ -82,7 +82,11 @@ target_compile_options(swiftnav PRIVATE "-Wformat=2")
 target_compile_options(swiftnav PRIVATE "-Wimplicit-function-declaration")
 target_compile_options(swiftnav PRIVATE "-Wredundant-decls")
 target_compile_options(swiftnav PRIVATE "-Wformat-security")
+
+# require at least gcc 5.0
+if (CMAKE_C_COMPILER_VERSION VERSION_GREATER 5.0)
 target_compile_options(swiftnav PRIVATE "-Wfloat-conversion")
+endif()
 
 # unit tests
 if(NOT CMAKE_CROSSCOMPILING AND NOT PIKSI_MULTI_UNIT_TEST)
