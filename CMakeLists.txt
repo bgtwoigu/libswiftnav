@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(libswiftnav)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/" "${PROJECT_SOURCE_DIR}/cmake/common")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/" "${CMAKE_CURRENT_LIST_DIR}/cmake/common")
 
 set(MAX_CHANNELS "63" CACHE STRING "Maximum number of concurrent GNSS channels to support.")
 configure_file(src/max_channels.h.in max_channels.h)
