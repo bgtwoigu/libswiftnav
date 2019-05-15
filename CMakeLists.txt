@@ -8,9 +8,17 @@ configure_file(src/max_channels.h.in max_channels.h)
 
 include(GNUInstallDirs)
 include(SwiftCmakeOptions)
+
+set(disable_tests FALSE)
+if(MSVC)
+  message(STATUS "MSVC detected, skipping unit tests")
+  set(disable_tests TRUE)
+endif()
+
 swift_create_project_options(
     HAS_TESTS
     HAS_TEST_LIBS
+    DISABLE_TESTS ${disable_tests}
     TEST_PACKAGES "Check"
     )
 
