@@ -114,3 +114,11 @@ if(libswiftnav_BUILD_TESTS OR libswiftnav_BUILD_TEST_LIBS)
   endif()
   add_subdirectory(tests)
 endif()
+
+# Temporary hack until clang tools support is back
+if(NOT TARGET clang-format-all)
+  add_custom_target(clang-format-all)
+endif()
+if(NOT TARGET clang-tidy-all)
+  add_custom_target(clang-tidy-all)
+endif()
