@@ -18,7 +18,7 @@ endif()
 swift_create_project_options(
     HAS_TESTS
     HAS_TEST_LIBS
-    DISABLE_TESTS ${disable_tests}
+    DISABLE_TEST_COMPONENTS ${disable_tests}
     TEST_PACKAGES "Check"
     )
 
