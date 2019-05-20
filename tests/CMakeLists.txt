@@ -29,12 +29,12 @@ set(SRCS
     check_troposphere.c)
 
 add_executable(test-swiftnav-common ${HDRS} ${SRCS})
-if(PLATFORM_IMPLEMENTATION_NO_PTHREAD)
-    target_link_libraries(test-swiftnav-common check-utils
-            ${CHECK_LIBRARIES} pthread)
-else()
+if(PLATFORM_IMPLEMENTATION_HAS_PTHREAD)
     target_link_libraries(test-swiftnav-common check-utils
             ${CHECK_LIBRARIES} )
+else()
+    target_link_libraries(test-swiftnav-common check-utils
+            ${CHECK_LIBRARIES} pthread)
 endif()
 set_property(TARGET test-swiftnav-common PROPERTY C_STANDARD 99)
 # Add a target for running the tests. 
