@@ -31,5 +31,8 @@ if(libswiftnav_BUILD_TESTS)
 
   set_property(TARGET test-swiftnav-common PROPERTY C_STANDARD 99)
 
-  add_test(NAME test-swiftnav-common COMMAND test-swiftnav-common)
+  # Add a target for running the tests. 
+  add_custom_target(run-test-swiftnav-common COMMAND test-swiftnav-common)
+  # And run them upon completion.
+  add_custom_command(TARGET test-swiftnav-common POST_BUILD COMMAND test-swiftnav-common)
 endif(libswiftnav_BUILD_TESTS)

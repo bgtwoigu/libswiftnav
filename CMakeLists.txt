@@ -109,9 +109,6 @@ endif()
 
 # unit tests
 if(libswiftnav_BUILD_TESTS OR libswiftnav_BUILD_TEST_LIBS)
-  if(libswiftnav_BUILD_TESTS)
-    enable_testing()
-  endif()
   add_subdirectory(tests)
 endif()
 
