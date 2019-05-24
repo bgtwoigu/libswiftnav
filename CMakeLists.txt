@@ -22,6 +22,10 @@ swift_create_project_options(
     TEST_PACKAGES "Check"
     )
 
+include(ClangFormat)
+swift_setup_clang_format()
+include(ClangTidy)
+
 set(HDRS
     include/swiftnav/almanac.h
     include/swiftnav/array_tools.h
@@ -80,6 +84,7 @@ target_include_directories(swiftnav PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(swiftnav PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 install(FILES ${HDRS} DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/swiftnav)
 install(TARGETS swiftnav DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR})
+swift_target_enable_clang_tidy(swiftnav)
 
 set_property(TARGET swiftnav PROPERTY C_STANDARD 99)
 
@@ -112,10 +117,4 @@ if(libswiftnav_BUILD_TESTS OR libswiftnav_BUILD_TEST_LIBS)
   add_subdirectory(tests)
 endif()
 
-# Temporary hack until clang tools support is back
-if(NOT TARGET clang-format-all)
-  add_custom_target(clang-format-all)
-endif()
-if(NOT TARGET clang-tidy-all)
-  add_custom_target(clang-tidy-all)
-endif()
+swift_setup_clang_tidy()
