@@ -25,6 +25,7 @@ swift_create_project_options(
 include(ClangFormat)
 swift_setup_clang_format()
 include(ClangTidy)
+swift_setup_clang_tidy(FILES "src/*.c")
 
 set(HDRS
     include/swiftnav/almanac.h
@@ -84,7 +85,6 @@ target_include_directories(swiftnav PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(swiftnav PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 install(FILES ${HDRS} DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/swiftnav)
 install(TARGETS swiftnav DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR})
-swift_target_enable_clang_tidy(swiftnav)
 
 set_property(TARGET swiftnav PROPERTY C_STANDARD 99)
 
@@ -116,5 +116,3 @@ endif()
 if(libswiftnav_BUILD_TESTS OR libswiftnav_BUILD_TEST_LIBS)
   add_subdirectory(tests)
 endif()
-
-swift_setup_clang_tidy()
