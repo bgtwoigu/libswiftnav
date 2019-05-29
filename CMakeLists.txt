@@ -26,7 +26,7 @@ swift_create_project_options(
 include(ClangFormat)
 swift_setup_clang_format()
 include(ClangTidy)
-swift_setup_clang_tidy(FILES "src/*.c")
+swift_setup_clang_tidy(PATTERNS "src/*.c")
 
 set(HDRS
     include/swiftnav/almanac.h
