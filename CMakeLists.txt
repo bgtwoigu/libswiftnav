@@ -7,6 +7,7 @@ set(MAX_CHANNELS "63" CACHE STRING "Maximum number of concurrent GNSS channels t
 configure_file(src/max_channels.h.in max_channels.h)
 
 include(GNUInstallDirs)
+include(CCache)
 include(SwiftCmakeOptions)
 
 set(disable_tests FALSE)
