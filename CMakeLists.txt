@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
-project(libswiftnav)
+
+project(libswiftnav LANGUAGES C CXX VERSION 0.1.7)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/" "${CMAKE_CURRENT_LIST_DIR}/cmake/common")
 
@@ -27,6 +28,8 @@ include(ClangFormat)
 swift_setup_clang_format()
 include(ClangTidy)
 swift_setup_clang_tidy(PATTERNS "src/*.c")
+
+include(SwiftPackageHelpers)
 
 set(HDRS
     include/swiftnav/almanac.h
@@ -82,10 +85,8 @@ set(SRCS
     src/troposphere.c)
 
 add_library(swiftnav ${HDRS} ${SRCS})
-target_include_directories(swiftnav PUBLIC ${PROJECT_SOURCE_DIR}/include)
-target_include_directories(swiftnav PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
-install(FILES ${HDRS} DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/swiftnav)
-install(TARGETS swiftnav DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR})
+target_include_directories(swiftnav PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
+target_include_directories(swiftnav PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
 
 set_property(TARGET swiftnav PROPERTY C_STANDARD 99)
 
@@ -112,6 +113,11 @@ else ()
         target_compile_options(swiftnav PRIVATE "-Wfloat-conversion")
     endif()
 endif()
+
+swift_install_targets(
+    TARGETS swiftnav
+    HEADER_DIRS ${PROJECT_SOURCE_DIR}/include/swiftnav
+    )
 
 # unit tests
 if(libswiftnav_BUILD_TESTS OR libswiftnav_BUILD_TEST_LIBS)

@@ -3,6 +3,8 @@ if(libswiftnav_BUILD_TEST_LIBS)
 endif()
 
 if(libswiftnav_BUILD_TESTS)
+  find_package(Threads)
+
   set(HDRS
       check_suites.h)
 
@@ -26,8 +28,11 @@ if(libswiftnav_BUILD_TESTS)
       check_troposphere.c)
 
   add_executable(test-swiftnav-common ${HDRS} ${SRCS})
-  target_link_libraries(test-swiftnav-common check-utils
-                        ${CHECK_LIBRARIES} pthread)
+  target_link_libraries(test-swiftnav-common 
+      check-utils
+      ${CHECK_LIBRARIES}
+      Threads::Threads
+      )
 
   set_property(TARGET test-swiftnav-common PROPERTY C_STANDARD 99)
 
