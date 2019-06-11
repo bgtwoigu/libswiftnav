@@ -27,6 +27,8 @@ include(ClangFormat)
 swift_setup_clang_format()
 include(ClangTidy)
 swift_setup_clang_tidy(PATTERNS "src/*.c")
+include(CodeCoverage)
+add_code_coverage_all_targets(EXCLUDE ${CMAKE_CURRENT_LIST_DIR}/tests/*)
 
 set(HDRS
     include/swiftnav/almanac.h
