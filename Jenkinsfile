@@ -159,7 +159,7 @@ def libswiftnavCmake(Map args = [:]) {
     rm -rf build && mkdir -p build && cd build
 
     CMAKE_ARGS=""
-    if [ "\${buildType}" == "coverage" ]; then
+    if [ "${buildType}" == "coverage" ]; then
         CMAKE_ARGS="-DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug"
     fi
 
