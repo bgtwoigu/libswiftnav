@@ -125,7 +125,9 @@ pipeline {
                     }
                     post {
                         success {
-                            sh("bash <(curl -s https://codecov.io/bash) -s build || echo 'Codecov did not collect coverage reports';")
+                            sh '''
+                                bash <(curl -s https://codecov.io/bash) -s build || echo "Codecov did not collect coverage reports"
+                            '''
                         }
                     }
                 }
