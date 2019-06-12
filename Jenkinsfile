@@ -125,8 +125,7 @@ pipeline {
                     }
                     post {
                         success {
-                            //sh("bash <(curl -s https://codecov.io/bash) -s c/build || echo 'Codecov did not collect coverage reports';")
-                            echo "(MWURM) Analyze/Upload the code coverage result file here."
+                            sh("bash <(curl -s https://codecov.io/bash) -s build || echo 'Codecov did not collect coverage reports';")
                         }
                     }
                 }
