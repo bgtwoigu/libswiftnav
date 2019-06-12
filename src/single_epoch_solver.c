@@ -1052,6 +1052,8 @@ static s8 pvt_repair(const u8 n_used,
     constellation_t tmp = constellation_string_to_enum(
         constellation_to_string(CONSTELLATION_GPS));
 
+    assert(tmp == 0);
+
     if (successful_exclusion_found) {
       /* Successful exclusion found. Recalculate that solution. */
       s8 flag = pvt_iter_masked(n_used,
