@@ -125,9 +125,11 @@ pipeline {
                     }
                     post {
                         success {
-                            sh '''#!/bin/bash -ex
-                                bash <(curl -s https://codecov.io/bash) -s build || echo "Codecov did not collect coverage reports"
-                            '''
+                            withCredentials([string(credentialsId: 'codecov-libswiftnav-token', variable: 'CODECOV_TOKEN')]) {
+                                sh '''#!/bin/bash -ex
+                                    bash <(curl -s https://codecov.io/bash) -s build || echo "Codecov did not collect coverage reports"
+                                '''
+                            }
                         }
                     }
                 }
