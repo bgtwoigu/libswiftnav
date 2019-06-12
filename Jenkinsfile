@@ -109,6 +109,27 @@ pipeline {
                         }
                     }
                 }
+                stage('Code Coverage') {
+                    agent {
+                        dockerfile {
+                            args dockerMountArgs
+                        }
+                    }
+
+                    steps {
+                        gitPrep()
+                        libswiftnavCmake(buildType: "coverage")
+                        script {
+                            builder.make(workDir: "build", target: "ccov-all")
+                        }
+                    }
+                    post {
+                        success {
+                            //sh("bash <(curl -s https://codecov.io/bash) -s c/build || echo 'Codecov did not collect coverage reports';")
+                            echo "(MWURM) Analyze/Upload the code coverage result file here."
+                        }
+                    }
+                }
             }
         }
     }
@@ -132,9 +153,16 @@ pipeline {
  * @return
  */
 def libswiftnavCmake(Map args = [:]) {
+    def buildType = args.buildType ?: "build"
 
     sh """#!/bin/bash -ex
     rm -rf build && mkdir -p build && cd build
-    cmake ..
+
+    CMAKE_ARGS=""
+    if [ "\${buildType}" == "coverage" ]; then
+        CMAKE_ARGS="-DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug"
+    fi
+
+    cmake \"\${CMAKE_ARGS}\" ..
     """
 }
