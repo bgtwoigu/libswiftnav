@@ -163,6 +163,6 @@ def libswiftnavCmake(Map args = [:]) {
         CMAKE_ARGS="-DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug"
     fi
 
-    cmake ${CMAKE_ARGS} ..
+    cmake \${CMAKE_ARGS} ..
     """
 }
