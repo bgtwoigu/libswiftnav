@@ -158,7 +158,7 @@ pipeline {
 def libswiftnavCmake(Map args = [:]) {
     def buildType = args.buildType ?: "build"
 
-    sh '''#!/bin/bash -ex
+    sh """#!/bin/bash -ex
     rm -rf build && mkdir build && cd build
 
     CMAKE_ARGS=""
@@ -167,5 +167,5 @@ def libswiftnavCmake(Map args = [:]) {
     fi
 
     cmake \${CMAKE_ARGS} ..
-    '''
+    """
 }
