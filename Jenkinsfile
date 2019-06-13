@@ -127,7 +127,7 @@ pipeline {
                         success {
                             withCredentials([string(credentialsId: 'codecov-libswiftnav-token', variable: 'CODECOV_TOKEN')]) {
                                 sh '''#!/bin/bash -ex
-                                    bash <(curl -s https://codecov.io/bash) -s build || echo "Codecov did not collect coverage reports"
+                                    bash <(curl -s https://codecov.io/bash) -s build || echo "(SWIFTNAV) Codecov failed to collect coverage reports!"
                                 '''
                             }
                         }
@@ -158,8 +158,8 @@ pipeline {
 def libswiftnavCmake(Map args = [:]) {
     def buildType = args.buildType ?: "build"
 
-    sh """#!/bin/bash -ex
-    rm -rf build && mkdir -p build && cd build
+    sh '''#!/bin/bash -ex
+    rm -rf build && mkdir build && cd build
 
     CMAKE_ARGS=""
     if [ "${buildType}" == "coverage" ]; then
@@ -167,5 +167,5 @@ def libswiftnavCmake(Map args = [:]) {
     fi
 
     cmake \${CMAKE_ARGS} ..
-    """
+    '''
 }
