@@ -84,6 +84,7 @@ set(SRCS
     src/troposphere.c)
 
 add_library(swiftnav ${HDRS} ${SRCS})
+target_code_coverage(swiftnav AUTO ALL)
 target_include_directories(swiftnav PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(swiftnav PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 install(FILES ${HDRS} DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/swiftnav)
@@ -93,7 +94,7 @@ set_property(TARGET swiftnav PROPERTY C_STANDARD 99)
 
 if (MSVC)
 else ()
-    target_link_libraries(swiftnav m)
+    target_link_libraries(swiftnav PRIVATE m)
     target_compile_options(swiftnav PRIVATE "-Werror")
     target_compile_options(swiftnav PRIVATE "-Wmissing-prototypes")
     target_compile_options(swiftnav PRIVATE "-Wimplicit")
