@@ -127,7 +127,7 @@ pipeline {
                         success {
                             withCredentials([string(credentialsId: 'codecov-libswiftnav-token', variable: 'CODECOV_TOKEN')]) {
                                 sh '''#!/bin/bash -ex
-                                    bash <(curl -s https://codecov.io/bash) -s build -g tests || echo "(SWIFTNAV) Codecov failed to collect coverage reports!"
+                                    bash <(curl -s https://codecov.io/bash) -s build -g tests -G src || echo "(SWIFTNAV) Codecov failed to collect coverage reports!"
                                 '''
                             }
                         }
