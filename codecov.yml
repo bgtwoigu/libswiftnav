@@ -4,9 +4,15 @@ coverage:
       default: off
       tests:
         target: 100%
-        paths: "tests/"
+        flags: tests
       libswiftnav:
-        paths: "!tests/"
+        flags: libswiftnav
+
+flags:
+  tests:
+    paths: "tests/"
+  libswiftnav:
+    paths: "!tests/"
 
 comment:
   layout: "diff, files, footer"
