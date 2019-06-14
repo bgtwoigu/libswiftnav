@@ -1,6 +1,7 @@
 coverage:
   status:
     project:
+      default: off
       tests:
         target: 100%
         paths: "tests/"
