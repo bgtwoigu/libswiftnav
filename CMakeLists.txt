@@ -84,7 +84,7 @@ set(SRCS
     src/troposphere.c)
 
 add_library(swiftnav ${HDRS} ${SRCS})
-target_code_coverage(swiftnav AUTO ALL)
+#target_code_coverage(swiftnav AUTO ALL)
 target_include_directories(swiftnav PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories(swiftnav PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 install(FILES ${HDRS} DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/swiftnav)
